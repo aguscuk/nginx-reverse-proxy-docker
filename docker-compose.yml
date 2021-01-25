@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - nginx-vol:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  nginx-vol:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=nfs-server,nolock,soft,ro,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2"
+      device: ":/nfs-share/nginx"
